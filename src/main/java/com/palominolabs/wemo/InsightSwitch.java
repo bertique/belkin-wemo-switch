@@ -12,8 +12,7 @@ public class InsightSwitch {
 
     public PowerUsage getPowerUsage() throws InsightSwitchOperationException {
         Action action = device.getAction("GetInsightParams");
-        performAction(action);
-
+        performAction(action);        
         return new PowerUsage(action.getArgumentValue("InsightParams"));
     }
 
@@ -22,14 +21,20 @@ public class InsightSwitch {
     }
 
     public void switchOff() throws InsightSwitchOperationException {
-        setSwitchIsOn(false);
+    	setSwitchIsOn(false);
     }
 
     public void setSwitchIsOn(boolean on) throws InsightSwitchOperationException {
-        Action action = device.getAction("SetBinaryState");
+        Action action = device.getAction("SetBinaryState");        
         action.setArgumentValue("BinaryState", on ? 1 : 0);
 
         performAction(action);
+    }
+    
+    public String getState() throws InsightSwitchOperationException {
+    	Action action = device.getAction("GetBinaryState");
+        performAction(action);
+        return action.getArgumentValue("BinaryState");
     }
 
     public String getFriendlyName() throws InsightSwitchOperationException {

@@ -12,7 +12,8 @@ import java.util.concurrent.TimeUnit;
 
 public class InsightSwitchFinder implements AutoCloseable {
 
-    private static final String BELKIN_INSIGHT_DEVICE_TYPE = "urn:Belkin:device:insight:1";
+    //private static final String BELKIN_INSIGHT_DEVICE_TYPE = "urn:Belkin:device:insight:1";
+	private static final String BELKIN_INSIGHT_DEVICE_TYPE = "urn:Belkin:device:controllee:1";
 
     private final ControlPoint controlPoint;
 
@@ -42,20 +43,21 @@ public class InsightSwitchFinder implements AutoCloseable {
         controlPoint.addDeviceChangeListener(new DeviceChangeListener() {
             @Override
             public void deviceAdded(Device device) {
-                if (!device.getDeviceType().equals(BELKIN_INSIGHT_DEVICE_TYPE)) {
+            	if (!device.getDeviceType().equals(BELKIN_INSIGHT_DEVICE_TYPE)) {
                     return;
                 }
 
                 InsightSwitch insightSwitch = new InsightSwitch(device);
 
 
-                try {
-                    if (friendlyNames.contains(insightSwitch.getFriendlyName())) {
+                //try {
+                    //if (friendlyNames.contains(insightSwitch.getFriendlyName())) {
+                	if (true) {
                         countDownLatch.countDown();
                     }
-                } catch (InsightSwitchOperationException e) {
-                    throw new RuntimeException(e);
-                }
+                //} catch (InsightSwitchOperationException e) {
+                //    throw new RuntimeException(e);
+                //}
             }
 
             @Override
