@@ -8,3 +8,4 @@
 target
 .~lock.*.od*#
 .gradletasknamecache
+.settings
